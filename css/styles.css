@@ -1,0 +1,20 @@
+
+* {
+    box-sizing: border-box;
+  }
+  ul.gallery {
+    list-style-type: none;
+    width: 1128px;
+    height: 600px;
+    display: grid;
+    grid-gap: 24px;
+    grid-template-columns: 360px 360px 360px;
+    grid-template-rows: 200px 200px 200px;
+  }
+  li .gallery-item {
+    padding: 24px;
+  }
+  li .gallery-item > img .gallery-image {
+    padding: 24px;
+  }
+  
