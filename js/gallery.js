@@ -1,4 +1,3 @@
-
 "use strict";
 const images = [
   {
@@ -92,7 +91,7 @@ for (const image of images) {
 
   galleryArr.push(fragment.children.item(0));
 }
-strGallery = galleryArr.map(el=>el.outerHTML).join("");
+strGallery = galleryArr.map((el) => el.outerHTML).join("");
 galleryItem.innerHTML = strGallery;
 
 document.addEventListener("keydown", (event) => {
