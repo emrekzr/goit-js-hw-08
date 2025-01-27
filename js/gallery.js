@@ -66,55 +66,49 @@ const images = [
 ];
 
 const galleryItem = document.querySelector("ul.gallery");
+
 const galleryArr = [];
 let strGallery = "";
 let instance;
 
 for (const image of images) {
   const { preview, original, description } = image;
-  const fragment = document.createDocumentFragment();
   const liElem = document.createElement("li");
   liElem.className = "gallery-item";
   const aItem = document.createElement("a");
   aItem.className = "gallery-link";
-  aItem.href = cropStringLetters(original);
+  aItem.href = original;
   const imgItem = document.createElement("img");
   imgItem.className = "gallery-image";
-  imgItem.src = cropStringLetters(preview);
-  imgItem.dataset.source = cropStringLetters(original);
+  imgItem.src = preview; 
+  imgItem.dataset.source = original;
   imgItem.alt = description;
   imgItem.width = 360;
   imgItem.height = 200;
   aItem.append(imgItem);
   liElem.append(aItem);
-  fragment.append(liElem);
 
-  galleryArr.push(fragment.children.item(0));
+  galleryArr.push(liElem);
 }
+
 strGallery = galleryArr.map((el) => el.outerHTML).join("");
 galleryItem.innerHTML = strGallery;
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
+  if (event.key === "Escape" && instance) {
     instance.close();
   }
 });
-document.addEventListener("click", onGalleryClick);
 
-function onGalleryClick(event) {
-  const galleryContainer = document.querySelector(".gallery");
+document.addEventListener("click", (event) => {
+  const target = event.target;
 
-  if (
-    !galleryContainer.contains(event.target) ||
-    event.target.nodeName !== "IMG"
-  ) {
+  if (target.nodeName !== "IMG") {
     return;
   }
 
-  const instanceEvent = event.target;
-  const html = `<img class='modal-img' src='${instanceEvent.dataset.source}' alt='${instanceEvent.alt}' width='1112' height='640'>`;
+  const html = `<img class='modal-img' src='${target.dataset.source}' alt='${target.alt}' width='1112' height='640'>`;
 
   instance = basicLightbox.create(html);
-
   instance.show();
-}
+});
