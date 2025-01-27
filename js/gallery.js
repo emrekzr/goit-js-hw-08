@@ -111,4 +111,4 @@ document.addEventListener("click", (event) => {
 
   instance = basicLightbox.create(html);
   instance.show();
-});
+}); 
