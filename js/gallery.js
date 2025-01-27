@@ -101,16 +101,17 @@ document.addEventListener("keydown", (event) => {
 });
 document.addEventListener("click", onGalleryClick);
 
-function cropStringLetters(str) {
-  return str.substring(1, str.length - 1);
-}
-
 function onGalleryClick(event) {
-  const instanceEvent = event.target;
-  if (event.target.nodeName !== "IMG") {
+  const galleryContainer = document.querySelector(".gallery");
+
+  if (
+    !galleryContainer.contains(event.target) ||
+    event.target.nodeName !== "IMG"
+  ) {
     return;
   }
 
+  const instanceEvent = event.target;
   const html = `<img class='modal-img' src='${instanceEvent.dataset.source}' alt='${instanceEvent.alt}' width='1112' height='640'>`;
 
   instance = basicLightbox.create(html);
